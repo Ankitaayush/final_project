@@ -1,9 +1,11 @@
-const connection = require('../config/db');
-const path = require('path')
- 
-let getVpPage = (req, res)=>{
-    if(true){
-        connection.query(`SELECT rim.rid, (SELECT requests.req_date FROM requests WHERE requests.rid = rim.rid) as req_date,
+const connection = require("../config/db");
+const nodemailer = require("nodemailer");
+const path = require("path");
+
+let getVpPage = (req, res) => {
+  if (true) {
+    connection.query(
+      `SELECT rim.rid, (SELECT requests.req_date FROM requests WHERE requests.rid = rim.rid) as req_date,
         (SELECT requests.name FROM requests WHERE requests.rid = rim.rid) as name, rim.itid,
         (SELECT items.item_name FROM items WHERE rim.itid=items.itid) as item_name,
         rim.item_spec, rim.item_quantity, s1.rqid, s1.status_id, s1.vendor_name,
@@ -20,92 +22,161 @@ let getVpPage = (req, res)=>{
         ON rs.vid = v.vid
         ) as s1
         ON s1.rm_id = rim.rm_id
-        HAVING status_id = 2 AND app1 = 2 AND app2 = 0`, function(error, results, fields) {
-            let mp1 = new Map();
-            let mp2 = new Map();
-            let mp3 = new Map();
-            for(let i=0; i<results.length; i++) {
-                mp1.set(results[i].rid.toString(), {
-                    id : results[i].rid,
-                    date : results[i].req_date.toString().substring(0, 15),
-                    name : results[i].name,
-                    item : []
-                });
-                mp2.set(results[i].rqid.toString(), {
-                    rqid: results[i].rqid,
-                    status: results[i].status_id,
-                    vendor_name: results[i].vendor_name,
-                    vendor_email: results[i].email,
-                    contact_person: results[i].contact_person,
-                    quote_amount: results[i].quote_amount,
-                    quote: results[i].quote,
-                    approval1 : results[i].app1,
-                    content1: results[i].manager_comment,
-                    approval2 : results[i].app2,
-                    content1: results[i].vp_comment,
-                    po: results[i].purchase_order,
-                    invoice: results[i].invoice
-                });
-            }
-            for(let i=0; i<results.length; i++){
-                if(!mp3.has(results[i].rid.toString()+","+results[i].itid.toString().toString())){
-                    mp1.get(results[i].rid.toString()).item.push({
-                        id: results[i].itid,
-                        name : results[i].item_name,
-                        spec : results[i].item_spec,
-                        quantity : results[i].item_quantity,
-                        vendor : []
-                    })
-                    mp3.set(results[i].rid.toString()+","+results[i].itid.toString().toString() ,mp1.get(results[i].rid.toString()).item.length);
-                }
-                mp1.get(results[i].rid.toString()).item[mp3.get(results[i].rid.toString()+","+results[i].itid.toString().toString())-1].vendor.push(mp2.get(results[i].rqid.toString()));
-            }
-            let data = [];
-            for (let [key, value] of mp1) {
-                data.push(value);
-            }
-            // console.log(data);
-            res.send(data);
-        });
-    } else {
-        return res.redirect('/login');
-    }  
+        HAVING status_id = 2 AND app1 = 2 AND app2 = 0`,
+      function (error, results, fields) {
+        let mp1 = new Map();
+        let mp2 = new Map();
+        let mp3 = new Map();
+        for (let i = 0; i < results.length; i++) {
+          mp1.set(results[i].rid.toString(), {
+            id: results[i].rid,
+            date: results[i].req_date.toString().substring(0, 15),
+            name: results[i].name,
+            item: [],
+          });
+          mp2.set(results[i].rqid.toString(), {
+            rqid: results[i].rqid,
+            status: results[i].status_id,
+            vendor_name: results[i].vendor_name,
+            vendor_email: results[i].email,
+            contact_person: results[i].contact_person,
+            quote_amount: results[i].quote_amount,
+            quote: results[i].quote,
+            approval1: results[i].app1,
+            content1: results[i].manager_comment,
+            approval2: results[i].app2,
+            content1: results[i].vp_comment,
+            po: results[i].purchase_order,
+            invoice: results[i].invoice,
+          });
+        }
+        for (let i = 0; i < results.length; i++) {
+          if (
+            !mp3.has(
+              results[i].rid.toString() +
+                "," +
+                results[i].itid.toString().toString()
+            )
+          ) {
+            mp1.get(results[i].rid.toString()).item.push({
+              id: results[i].itid,
+              name: results[i].item_name,
+              spec: results[i].item_spec,
+              quantity: results[i].item_quantity,
+              vendor: [],
+            });
+            mp3.set(
+              results[i].rid.toString() +
+                "," +
+                results[i].itid.toString().toString(),
+              mp1.get(results[i].rid.toString()).item.length
+            );
+          }
+          mp1
+            .get(results[i].rid.toString())
+            .item[
+              mp3.get(
+                results[i].rid.toString() +
+                  "," +
+                  results[i].itid.toString().toString()
+              ) - 1
+            ].vendor.push(mp2.get(results[i].rqid.toString()));
+        }
+        let data = [];
+        for (let [key, value] of mp1) {
+          data.push(value);
+        }
+        // console.log(data);
+        res.send(data);
+      }
+    );
+  } else {
+    return res.redirect("/login");
+  }
 };
- 
+
 const getQuotation = (req, res) => {
-    const id = req.params.id;
-    const fileName = path.join(__dirname, '../public/', id + '.pdf');
-    res.sendFile(fileName)
-}
- 
+  const id = req.params.id;
+  const fileName = path.join(__dirname, "../public/", id + ".pdf");
+  res.sendFile(fileName);
+};
+
 const updateStatus = async (req, res) => {
-    const { rqid, action, comment } = req.body;
-    console.log(req.body);
-    const sql = 'UPDATE requeststatuses SET app2 = ?, vp_comment = ? WHERE rqid = ?'
- 
-    connection.query(sql, [action, comment, rqid], (err, result) => {
-        if(err) {
-            return res.status(500).json({
-                status: 'failure',
-                err
-            })
+  const { rqid, action, comment } = req.body;
+  console.log(req.body);
+  const sql =
+    "UPDATE requeststatuses SET app2 = ?, vp_comment = ? WHERE rqid = ?";
+
+  connection.query(sql, [action, comment, rqid], (err, result) => {
+    if (err) {
+      return res.status(500).json({
+        status: "failure",
+        err,
+      });
+    }
+
+    if (result.affectedRows === 0) {
+      return res.status(404).json({
+        status: "success",
+        err,
+      });
+    }
+    if (action == 2) {
+      connection.query(
+        `SELECT email FROM users WHERE id = 3`,
+        function (error, result, fields) {
+          adminTrigger(result[0].email);
         }
- 
-        if(result.affectedRows === 0) {
-            return res.status(404).json({
-                status: 'success',
-                err
-            })
-        }
- 
-        return res.status(201).json({
-            status: 'success'
-        })
-    })
-}
- 
+      );
+    }
+    return res.status(201).json({
+      status: "success",
+    });
+  });
+};
+
+const adminTrigger = (recipient) => {
+  console.log("mail starting");
+  const transporter = nodemailer.createTransport({
+    host: "smtp-mail.outlook.com",
+    port: 587,
+    secureConnection: false,
+    auth: {
+      user: "idcassetprocurement@outlook.com",
+      pass: "Qwerty@1234", //app password of outlook account
+    },
+    tls: {
+      ciphers: "SSLv3",
+    },
+  });
+  const mailOptions = {
+    from: {
+      name: "IDC BLR",
+      address: "idcassetprocurement@outlook.com",
+    },
+    to: "aryanjamuar@proton.me",
+    subject: "Request for generation of purchase order for IT Assets",
+    html: `
+    <p>Dear Admin, <br>I hope this email finds you well. I am writing to request you for generation of purchase order for procurement of a new IT Asset.</p>
+    <p>Please visit <a href='http://localhost:3000/login'>here</a> to upload the purchase order.</p>
+    <p>Fastenal India Sourcing IT & Procurement pvt ltd</p>`,
+  };
+
+  const sendMails = async (transporter, mailOptions) => {
+    try {
+      await transporter.sendMail(mailOptions);
+      console.log("Email sent successfully");
+    } catch (error) {
+      console.log(error);
+    }
+  };
+
+  sendMails(transporter, mailOptions);
+  console.log("mailsent");
+};
+
 module.exports = {
-    getVpPage,
-    getQuotation,
-    updateStatus
-}
+  getVpPage,
+  getQuotation,
+  updateStatus,
+};

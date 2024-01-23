@@ -39,10 +39,9 @@ export default function RequestTable() {
       const data = response.data;
 
       if (response.data.length > 0) {
-      
         if (searchInput.length > 0)
           data = data.filter((request) =>
-            request.name.toLowerCase().includes(searchInput.toLowerCase()),
+            request.name.toLowerCase().includes(searchInput.toLowerCase())
           );
 
         // export default dummyData;
@@ -99,70 +98,87 @@ export default function RequestTable() {
 
   const handlePoDownload = async (e, rqid) => {
     try {
-      
-     const response = await axios.get(`http://localhost:5000/request/po/${rqid}`, { responseType: 'arraybuffer' });
-      const file = new Blob([response.data], { type: 'application/pdf' });
+      const response = await axios.get(
+        `http://localhost:5000/request/po/${rqid}`,
+        { responseType: "arraybuffer" }
+      );
+      const file = new Blob([response.data], { type: "application/pdf" });
       const fileUrl = URL.createObjectURL(file);
       window.open(fileUrl);
-     } catch (err) {
-        console.log(err);
-     }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
-  const handleInvoiceUpload = () => {
-
-  }
+  const handleInvoiceUpload = () => {};
 
   const handleInvoiceDownload = async (event, rqid) => {
     try {
-    
-     const response = await axios.get(`http://localhost:5000/request/invoice/${rqid}`, { responseType: 'arraybuffer' });
-      const file = new Blob([response.data], { type: 'application/pdf' });
+      const response = await axios.get(
+        `http://localhost:5000/request/invoice/${rqid}`,
+        { responseType: "arraybuffer" }
+      );
+      const file = new Blob([response.data], { type: "application/pdf" });
       const fileUrl = URL.createObjectURL(file);
       window.open(fileUrl);
-     } catch (err) {
-        console.log(err);
-     }
+    } catch (err) {
+      console.log(err);
+    }
   };
 
   const handleFileDownload = async (event, rqid) => {
-     try {
-     const response = await axios.get(`http://localhost:5000/request/quote/${rqid}`, { responseType: 'arraybuffer' });
-      const file = new Blob([response.data], { type: 'application/pdf' });
+    try {
+      const response = await axios.get(
+        `http://localhost:5000/request/quote/${rqid}`,
+        { responseType: "arraybuffer" }
+      );
+      const file = new Blob([response.data], { type: "application/pdf" });
       const fileUrl = URL.createObjectURL(file);
       window.open(fileUrl);
-     } catch (err) {
-        console.log(err);
-     }
-
-     
-  }
+    } catch (err) {
+      console.log(err);
+    }
+  };
 
   const handleFormSubmit = async (event, rqid) => {
     event.preventDefault();
     try {
-     // console.error(document.getElementById('quoteU_'+rqid).files[0])
+      // console.error(document.getElementById('quoteU_'+rqid).files[0])
       const formData = new FormData();
-      
-      formData.append('rqid', rqid);
-      formData.append('status', document.getElementById('status_'+rqid).value);
-      formData.append('quote_amount', document.getElementById('quote_'+rqid).value);
-      console.log(document.getElementById('quoteU_'+rqid))
-      if(document.getElementById('quoteU_'+rqid)) {
-          
-          formData.append('quote', document.getElementById('quoteU_'+rqid).files[0], `quote_${rqid}.pdf`);
+
+      formData.append("rqid", rqid);
+      formData.append(
+        "status",
+        document.getElementById("status_" + rqid).value
+      );
+      formData.append(
+        "quote_amount",
+        document.getElementById("quote_" + rqid).value
+      );
+      console.log(document.getElementById("quoteU_" + rqid));
+      if (document.getElementById("quoteU_" + rqid).files.length != 0) {
+        formData.append(
+          "quote",
+          document.getElementById("quoteU_" + rqid).files[0],
+          `quote_${rqid}.pdf`
+        );
       }
-      
-      const response = await axios.patch('http://localhost:5000/request/update', formData);
-     
-      alert('Request updated!!')
+
+      const response = await axios.patch(
+        "http://localhost:5000/request/update",
+        formData
+      );
+
+      alert("Request updated!!");
     } catch (error) {
       console.error("Error submitting form:", error);
     }
   };
   const handleDeleteRequest = async (rqid) => {
     try {
-      const response = await axios.delete(`http://localhost:5000/request/${rqid}`);
+      const response = await axios.delete(
+        `http://localhost:5000/request/${rqid}`
+      );
 
       if (response.status === 204) {
         console.log("Request deleted successfully:", rqid);
@@ -240,7 +256,9 @@ export default function RequestTable() {
                         <>
                           <AccordionHeader>
                             <h3
-                              className={`accordion-title ${open ? "accordion-active" : ""}`}
+                              className={`accordion-title ${
+                                open ? "accordion-active" : ""
+                              }`}
                             >
                               {item.name}
                             </h3>
@@ -319,12 +337,15 @@ export default function RequestTable() {
                                       </td>
                                       <td>
                                         {vendor.quote ? (
-                                          <button 
+                                          <button
                                             id={"quoteU_" + vendor.rqid}
-                                            type="file" onClick={(e) => handleFileDownload(e, vendor.rqid)}>
+                                            type="file"
+                                            onClick={(e) =>
+                                              handleFileDownload(e, vendor.rqid)
+                                            }
+                                          >
                                             Download quote
                                           </button>
-
                                         ) : (
                                           <input
                                             id={"quoteU_" + vendor.rqid}
@@ -336,9 +357,9 @@ export default function RequestTable() {
                                         )}
                                       </td>
                                       <td>
-                                        {vendor.approval1 === undefined ? (
+                                        {vendor.approval1 === 0 ? (
                                           "pending"
-                                        ) : vendor.approval1 === 0 ? (
+                                        ) : vendor.approval1 === 1 ? (
                                           <span>&#10008; </span>
                                         ) : (
                                           <span>&#10004;</span>
@@ -348,9 +369,9 @@ export default function RequestTable() {
                                         {vendor.content1 ? vendor.content1 : ""}
                                       </td>
                                       <td>
-                                        {vendor.approval2 === undefined ? (
+                                        {vendor.approval2 === 0 ? (
                                           "pending"
-                                        ) : vendor.approval2 === 0 ? (
+                                        ) : vendor.approval2 === 1 ? (
                                           <span>&#10008; </span>
                                         ) : (
                                           <span>&#10004;</span>
@@ -360,18 +381,29 @@ export default function RequestTable() {
                                         {vendor.content2 ? vendor.content2 : ""}
                                       </td>
                                       <td>
-                                        <button 
-                                            id={"po" + vendor.rqid}
-                                            type="file" onClick={(e) => handlePoDownload(e, vendor.rqid)}>
-                                            Download PO
-                                          </button>
+                                        <button
+                                          id={"po" + vendor.rqid}
+                                          type="file"
+                                          onClick={(e) =>
+                                            handlePoDownload(e, vendor.rqid)
+                                          }
+                                        >
+                                          Download PO
+                                        </button>
                                       </td>
                                       <td>
-                                        {console.log('vendor invoice', vendor)}
+                                        {console.log("vendor invoice", vendor)}
                                         {vendor.invoice ? (
-                                          <button 
+                                          <button
                                             id={"invoice" + vendor.rqid}
-                                            type="file" onClick={(e) => handleInvoiceDownload(e, vendor.rqid)}>
+                                            type="file"
+                                            onClick={(e) =>
+                                              handleInvoiceDownload(
+                                                e,
+                                                vendor.rqid
+                                              )
+                                            }
+                                          >
                                             Download Invoice
                                           </button>
                                         ) : (
@@ -381,7 +413,7 @@ export default function RequestTable() {
                                             onChange={(e) =>
                                               handleInvoiceUpload(
                                                 e,
-                                                vendor.rqid,
+                                                vendor.rqid
                                               )
                                             }
                                           />
