@@ -1,0 +1,126 @@
+/* navbar.css */
+
+/* Reset some default styles */
+*{
+  margin: 0;
+  padding: 0;
+
+}
+
+
+body {
+  margin: 0;
+  padding: 0;
+  background-color: rgb(240, 242, 246);
+}
+/* For WebKit browsers (Chrome, Safari) */
+::-webkit-scrollbar {
+  height: 2px;
+  width:2px;
+}
+
+::-webkit-scrollbar-thumb {
+  background-color: #0066c0; /* Fastenal blue */
+  border-radius: 4px; /* Adjust the radius as needed */
+}
+
+::-webkit-scrollbar-track {
+  background-color: transparent;
+}
+
+/* For Firefox */
+body {
+  scrollbar-width: thin;
+  scrollbar-color: transparent #0066c0; /* Fastenal blue */
+}
+
+/* For Firefox - Hover effect (optional) */
+body:hover {
+  scrollbar-color: transparent #004b8d; /* Darker blue on hover */
+}
+
+
+/* Apply styles to the header */
+.header {
+  background-color: white; /* Light gray background */
+  /* padding: 10px; */
+  border-bottom: 3px solid #2196F3; /* Blue bottom border */
+  position: fixed;
+  top: 0;
+  left: 0; /* Stick the header at the top */
+  width: 100%; /* Take the full width */
+  z-index: 1000; /* Ensure it's on top of other elements */
+  display: flex; /* Arrange children in a row */
+  justify-content: space-between; /* Space between logo and navigation */
+}
+
+/* Apply styles to the logo */
+.logo img {
+  max-height: 250px; /* Adjust the maximum height of the logo */
+}
+
+/* Apply styles to the main navigation */
+.main-nav {
+  list-style-type: none;
+  margin: 0;
+  padding: 0;
+  display: flex; /* Arrange navigation items in a row */
+  align-items: center; /* Align items vertically in the center */
+}
+
+/* Apply styles to the navigation items */
+.main-nav li {
+  margin-right: 20px;
+}
+
+/* Apply styles to the navigation links */
+.main-nav a {
+  text-decoration: none;
+  color: #333; /* Default text color */
+  font-size: 20px; /* Adjust the font size */
+}
+
+/* Apply styles to the active tab */
+.active {
+  color: #2196F3; /* Blue text color for the active tab */
+  border-bottom: 4px solid #2196F3; /* Blue bottom border for the active tab */
+}
+
+/* Add this to your existing navbar.css or create a new CSS file */
+.dropdown {
+  display: inline-block;
+}
+
+.dropbtn {
+  font-size: 16px;
+  border: none;
+  outline: none;
+  color: inherit;
+  padding: 14px 16px;
+  background-color: inherit;
+  font-family: inherit;
+  margin: 0;
+}
+
+.dropdown-content {
+  display: none;
+  position: absolute;
+  background-color: #f9f9f9;
+  box-shadow: 0px 8px 16px 0px rgba(0, 0, 0, 0.2);
+  z-index: 1;
+}
+
+.dropdown-content a {
+  color: black;
+  padding: 12px 16px;
+  text-decoration: none;
+  display: block;
+}
+
+.dropdown-content a:hover {
+  background-color: #ddd;
+}
+
+.dropdown:hover .dropdown-content {
+  display: block;
+}

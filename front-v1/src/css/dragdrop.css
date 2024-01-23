@@ -1,0 +1,80 @@
+.form-container {
+  
+  margin: 10px auto;
+  padding: 20px;
+  background-color: #f2f2f2;
+  font-family: Roboto, Arial, sans-serif;
+  font-size: 16px;
+  padding: 10px;
+  border-radius: 5px;
+}
+@media (min-width: 0px) {
+  .form-container {
+    width: 100%;
+  }
+
+}
+.form-container input[type="text"]{
+  margin-left:1px;
+  width:95%;
+}
+@media (min-width: 1025px) {
+  .form-container {
+    width: 380px;
+  }
+}
+label{
+  padding:0;
+  margin:0;
+}
+input[type=checkbox]{
+  margin:10px auto 30px 10px;
+}
+.form-field {
+  margin-bottom: 10px;
+  width: 100%;
+}
+
+.drop-zone {
+  background-color: #f2f2f2;
+  border: 2px dashed #ccc;
+  border-radius: 8px;
+  padding: 20px;
+  margin:5px;
+  width: 95%;
+  text-align: center;
+  cursor: pointer;
+  transition: background-color 0.3s ease;
+}
+hr{
+  width:100%;
+}
+.drag-over {
+  background-color: #d4d4d4;
+}
+
+.drop-zone p {
+  margin-top: 10px;
+}
+
+button {
+  margin-top: 10px;
+  margin-left: 30px;
+}
+
+/* Additional styles for rounded corners and dotted line */
+.drop-zone {
+  position: relative;
+}
+
+.drop-zone::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  border: 1px dotted #ccc;
+  border-radius: 8px;
+}
+
