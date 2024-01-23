@@ -221,13 +221,14 @@ let createRequest = (req, res) => {
                     `INSERT INTO requeststatuses VALUES(NULL, ?, 0, 0, '', '', ?, '', NOW(), NOW(), 0, '', 0, '')`,
                     [vendors[j].vid, rmid]
                   );
+                  console.log("Vendors log", vendors[j].vid);
                   connection.query(
                     `SELECT * FROM vendors WHERE vid = ?`,
                     [vendors[j].vid],
                     function (err, vendorDetail, fields) {
-                      console.log(vendorDetail);
+                      console.log("Email log", vendorDetail);
                       mailTrigger(
-                        vendorDetail[j].email,
+                        vendorDetail[0].email,
                         item_name[0].item_name,
                         items[i].item_spec,
                         items[i].item_quantity
@@ -332,7 +333,7 @@ const getFile = (req, res) => {
   });
 };
 
-const mailTrigger = () => {
+const mailTrigger = (recipient, item_name, item_spec, item_quantity) => {
   console.log("mail starting");
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
@@ -352,9 +353,11 @@ const mailTrigger = () => {
       name: "IDC BLR",
       address: "idcassetprocurement@outlook.com",
     },
-    to: "hmishra@fastenal.com",
+    to: "aryanjamuar@proton.me",
     subject: "Request for Quote",
-    text: `Dear Vendor,\n\nWe would like to request a quote for the following item:,\nYour Company Name`,
+    html: `<p>Dear Vendor, <br>We would like to request a quote for the following item:-</p><br>
+  <p>${item_name} ${item_spec} : ${item_quantity} ps</p>
+  <p>Fastenal India Sourcing IT & Procurement pvt ltd</p>`,
   };
 
   const sendMails = async (transporter, mailOptions) => {
@@ -374,7 +377,7 @@ const managerTrigger = (recipient) => {
   console.log("mail starting");
   const transporter = nodemailer.createTransport({
     host: "smtp-mail.outlook.com",
-    port: 587,
+    port: 25,
     secureConnection: false,
     auth: {
       user: "idcassetprocurement@outlook.com",

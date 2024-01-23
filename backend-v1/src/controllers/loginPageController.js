@@ -47,7 +47,7 @@ let postLogin = (req, res, next) => {
           // else if (results[0].id == 3) res.redirect("/admin");
           // else if (results[0].id == 4) res.redirect("/request/track");
           // else res.redirect("/login");
-
+          console.log(token);
           res.cookie("jwt", token, {
             httpOnly: true,
             maxAge: 3600000,
@@ -88,9 +88,11 @@ const checkuserrole = (expectedrole) => {
   return (req, res, next) => {
     try {
       const token = req.cookies.jwt;
+
       if (!token)
         return res.status(401).json({ error: "Unauthorized :no token" });
       const decoded = jwt.verify(token, "qwertyuiotuyutreewfq");
+
       if (decoded.role === expectedrole) next();
       else return res.status(403).json({ error: "forbidden" });
     } catch (err) {
