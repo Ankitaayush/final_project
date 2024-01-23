@@ -1,0 +1,123 @@
+.vendor-management {
+    display: flex;
+  }
+  
+  .vendor-list{
+      width: 30%;
+      height:70vh;
+      margin: 20px auto;
+      padding: 10px;
+      border: 1px solid #ddd;
+      overflow:auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+    }
+  .vendor-list,.vendor-list2 {
+      width: 30%;
+      padding: 10px;
+      border: 1px solid #ddd;
+      overflow:auto;
+      border-radius: 8px;
+      box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+      background-color: white;
+    }
+    .vendor-list2{
+      
+      height:70vh;
+      margin: 10px ;
+      width: 20%;
+  }
+  .vendor-list h2,.vendor-list2 h2 {
+    margin-bottom: 10px;
+  }
+  
+  .vendor-list ul,.vendor-list2 ul {
+    list-style: none;
+    padding: 0;
+  }
+  
+  .vendor-list li, .vendor-list2 li {
+    padding: 5px;
+    cursor: pointer;
+    background-color: #0066c0; /* Slightly lighter blue on hover */
+    transition: background-color 0.3s;
+    color:white
+  }
+  .vendorButton{
+    width: 100%;
+    margin: 0 auto;
+    padding: 20px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+
+
+   
+    background-color: #0066c0; /* Slightly lighter blue on hover */
+    transition: background-color 0.3s;
+    color:white;
+    margin-left:0px;
+    margin-bottom: 10px;
+    border-radius: 0;
+
+  }
+  .vendorButton2{
+    width: 100%;
+    margin: 0 auto;
+    padding: 10px;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+
+
+   
+    background-color: #0066c0; /* Slightly lighter blue on hover */
+    transition: background-color 0.3s;
+    color:white;
+    margin-left:0px;
+    margin-bottom: 10px;
+    border-radius: 0;
+
+  }
+  .vendor-list button.selected {
+    background-color: black;
+  }
+
+  .vendor-list li.selected {
+    background-color: black;
+  }
+
+  .vendor-list2 button.selected {
+    background-color: black;
+  }
+ 
+  
+  .vendor-list2 li.selected {
+    background-color: black;
+  }
+  
+  .vendor-form {
+    flex: 1;
+    padding: 10px;
+    background-color: white;
+  }
+  
+  .vendor-card {
+    background-color: #004b8d; /* Fastenal blue */
+    color: white;
+    padding: 10px;
+    margin-bottom: 10px;
+    cursor: pointer;
+    transition: background-color 0.3s;
+  }
+  
+  .vendor-card:hover {
+    background-color: #0066c0; /* Slightly lighter blue on hover */
+  }
+  
+  .vendor-card.selected {
+    background-color: black;
+  }
+  

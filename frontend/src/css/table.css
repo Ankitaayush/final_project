@@ -1,0 +1,101 @@
+Add this CSS to your stylesheet or in a style tag in your React component
+*{
+  box-sizing: border-box;
+}
+/* Add these styles to your existing CSS file or create a new one */
+
+/* Container for the entire component */
+.cover {
+  display: flex;
+  background-color: rgb(240, 242, 246);
+  /* justify-content: space-between;
+  align-items: flex-start; */
+  /* padding: 20px; */
+}
+
+/* Styles for the accordion and item button on the left */
+.search-bar {
+  margin-right: 20px;
+}
+
+/* Styles for the accordion */
+.react-headless-accordion {
+  width: 200px; /* Set a fixed width for the accordion */
+}
+
+.vendor-card2 {
+  background-color: #004b8d; /* Fastenal blue */
+  color: white;
+  padding: 10px;
+  margin-bottom: 10px;
+  cursor: pointer;
+  width:80%;
+  margin-left: auto;
+  transition: background-color 0.3s;
+  /* display: inline; */
+}
+table{
+  table-layout: fixed;
+  /* border-spacing: 0px; */
+
+}
+.vendor-card2:hover {
+  background-color: #0066c0; /* Slightly lighter blue on hover */
+}
+
+.vendor-card2.selected {
+  background-color: black;
+}
+
+/* Styles for the table on the right */
+.table-entity {
+  /* flex-grow: 1; */
+  
+ 
+  max-width:75%;
+  box-sizing: border-box;
+  float:right;
+  /* display: flex; */
+  height: 72vh;
+  margin:auto;
+  align-items: center;
+  justify-content: center;
+  overflow:auto;
+
+  
+  /* Allow the table to grow and take remaining space */
+}
+tr{
+  border: 1px solid grey;
+}
+
+.customtable {
+  width: 100%; /* Make the table fill the available space */
+  /* border-collapse: collapse; */
+
+  margin-top: 10px;
+}
+.quoteU1_{
+  color:#022d53;
+  background-color: #068bff4a;
+}
+
+td{
+  /* border-spacing: 40px; */
+  /* display:flex ; */
+  text-align: center;
+  justify-content: center;
+  align-items: center;
+width: 250px;
+height:70px;
+  word-wrap: break-word;
+  /* border: 1px solid black; */
+}
+.table-entity input::file-selector-button {
+  font-weight: bold;
+  background-color: dodgerblue;
+  color: white;
+  padding: 0.5em;
+  
+border:0px ;
+}

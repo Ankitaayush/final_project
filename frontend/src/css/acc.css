@@ -1,0 +1,111 @@
+/* Add this CSS to your existing styles.css or in your React component's styles object */
+
+/* .cover {
+
+  width: 95vw;
+  margin-left: auto;
+  margin-right: auto;
+  
+} */
+
+.acc-item {
+  width: 100%;
+}
+
+.accordion-title {
+  margin: 0;
+  /* width:30%; */
+  /* width:70vw; */
+}
+
+.acc-item .accordion-body {
+  margin-left: 20px; /* Adjust the indentation as needed */
+}
+
+.acc-item .accordion-header {
+  background-color: #f1f1f1; /* Adjust the background color as needed */
+  padding: 10px;
+  cursor: pointer;
+}
+
+.acc-item .accordion-body {
+  padding: 10px;
+}
+
+.download-button,
+.upload-label {
+  display: inline-block;
+  margin-top: 10px;
+  background-color: #004b8d;
+  color: white;
+  padding: 10px;
+  cursor: pointer;
+  border-radius: 5px;
+  border: 1px solid #004b8d;
+}
+
+.download-button:hover,
+.upload-label:hover {
+  background-color: #01315c;
+}
+
+.upload-label input {
+  display: none;
+}
+
+.drag-over {
+  border: 2px dashed #013c70;
+}
+
+.ApprovalDiv {
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin-top: 10px;
+  /* margin-left: auto; */
+  background-color: white;
+  width: 150%;
+ 
+}
+
+.vendor-info,
+.quote-info,
+.upload-buttons {
+  margin-bottom: 10px;
+}
+
+.comment-box {
+  width: 100%;
+  height: 60px;
+  padding: 10px;
+  box-sizing: border-box;
+  margin-bottom: 10px;
+}
+
+.reject-button,
+.accept-button {
+  background-color: #4CAF50;
+  color: white;
+  padding: 10px;
+  margin-right: 10px;
+  cursor: pointer;
+  border: none;
+  border-radius: 5px;
+}
+.reject-button{
+  background-color: red;
+}
+.accept-button{
+  background-color: #02559f;
+}
+.reject-button:hover,
+.accept-button:hover {
+  background-color: #02559f;
+}
+
+
+
+  
+  
+  /* Add any other styles as needed */
+  
