@@ -1,0 +1,78 @@
+/* Updated Po CSS */
+.po-card-view {
+  background-color: #f5f5f5;
+  border: 1px solid #ddd;
+  border-radius: 5px;
+  padding: 10px;
+  margin: 10px;
+  width: 400px;
+  height: 92%;
+}
+.po-card-header {
+  text-align: center;
+}
+.po-right-column {
+  /* max-width:75%; */
+  box-sizing: border-box;
+  float: right;
+  /* display: flex; */
+  height: 72vh;
+  margin: auto;
+  align-items: center;
+  justify-content: center;
+  background-color: white;
+  /* overflow:auto; */
+}
+button {
+  margin: 0;
+  padding: 0px;
+  margin-bottom: 10px;
+  border: 0;
+}
+button .po-accordion-title {
+  width: 100%;
+  padding: 10px;
+  cursor: pointer;
+  background-color: #0066c0; /* Slightly lighter blue on hover */
+  transition: background-color 0.3s;
+  color: white;
+  margin-left: 0px;
+  border-radius: 0;
+}
+.po-card-header h2 {
+  margin-bottom: 5px;
+  font-size: 18px;
+  color: #333;
+}
+
+.po-card-header p {
+  margin: 0;
+  font-size: 14px;
+  color: #666;
+}
+
+.po-card-body {
+  margin-top: 10px;
+}
+
+.po-vendor-info,
+.po-quote-info,
+.po-upload-buttons {
+  margin-top: 10px;
+}
+
+.po-download-button {
+  display: block;
+  padding: 5px;
+  margin: 5px auto;
+  background-color: #0066c0;
+  color: white;
+  text-decoration: none;
+  text-align: center;
+  border-radius: 5px;
+  transition: background-color 0.3s;
+}
+
+.po-download-button:hover {
+  background-color: #005cbf;
+}

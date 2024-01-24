@@ -1,0 +1,58 @@
+/* Add these styles to your existing CSS file or create a new one */
+
+/* Container styling */
+.request-input-container {
+    max-width: 600px;
+    width: 400px;
+    /* margin: 10px auto; */
+    padding: 20px;
+    height:70vh;
+    border: 1px solid #ddd;
+    border-radius: 8px;
+    box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+    background-color: white;
+    overflow: auto;
+    box-sizing: border-box;
+  }
+  
+  /* Individual row styling */
+  .request-input-row {
+    margin-bottom: 10px;
+  }
+  
+  /* Label styling */
+  .request-input-label {
+    display: block;
+    margin-bottom: 5px;
+    font-weight: bold;
+  }
+  
+  /* Input and select styling */
+  .request-input-field {
+    width: 100%;
+    padding: 8px;
+    margin-bottom: 10px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    box-sizing: border-box;
+  }
+  
+  /* Button styling */
+  .request-input-button {
+  background-color: #0066c0; /* Slightly lighter blue on hover */
+ 
+    color: white;
+    padding: 10px 15px;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+  }
+  
+  .request-input-button:hover {
+    background-color: #01315c;
+  }
+
+  .delete-btn {
+    margin-left: 250px;
+  }
+  
